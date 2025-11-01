@@ -1,6 +1,11 @@
 import BN from "bn.js";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { GovernanceConfig } from "@solana/spl-governance";
+import {
+  GovernanceConfig,
+  VoteThreshold,
+  VoteThresholdType,
+  VoteTipping
+} from "@solana/spl-governance";
 
 export type DaoConfig = {
   communityMint: string;
@@ -16,17 +21,23 @@ export async function bootstrapDao(
 ) {
   const communityMint = new PublicKey(config.communityMint);
 
-  const governanceConfig: GovernanceConfig = {
-    communityMintMaxVoteWeightSource: { value: new BN(1000000) },
-    minCommunityTokensToCreateGovernance: new BN(config.minTokensToCreateProposal),
+  const governanceConfig = new GovernanceConfig({
+    communityVoteThreshold: new VoteThreshold({
+      type: VoteThresholdType.YesVotePercentage,
+      value: Number(config.minTokensToQuorum)
+    }),
     minCommunityTokensToCreateProposal: new BN(config.minTokensToCreateProposal),
-    minCommunityTokensToVote: new BN(0),
-    minCommunityTokensToExecute: new BN(0),
-    communityVoteThreshold: { type: 0, value: Number(config.minTokensToQuorum) },
     minInstructionHoldUpTime: 0,
-    maxVotingTime: config.votingPeriodDays * 24 * 60 * 60,
-    voteTipping: 0
-  };
+    baseVotingTime: config.votingPeriodDays * 24 * 60 * 60,
+    communityVoteTipping: VoteTipping.Strict,
+    minCouncilTokensToCreateProposal: new BN(0),
+    councilVoteThreshold: new VoteThreshold({ type: VoteThresholdType.Disabled }),
+    councilVetoVoteThreshold: new VoteThreshold({ type: VoteThresholdType.Disabled }),
+    communityVetoVoteThreshold: new VoteThreshold({ type: VoteThresholdType.Disabled }),
+    councilVoteTipping: VoteTipping.Disabled,
+    votingCoolOffTime: 0,
+    depositExemptProposalCount: 0
+  });
 
   return {
     communityMint,
