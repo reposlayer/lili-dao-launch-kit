@@ -1,5 +1,10 @@
 # DAO Launch Kit
-
+    ██╗     ██╗██╗     ██╗     ██████╗██╗     ██╗
+    ██║     ██║██║     ██║    ██╔════╝██║     ██║
+    ██║     ██║██║     ██║    ██║     ██║     ██║
+    ██║     ██║██║     ██║    ██║     ██║     ██║
+    ███████╗██║███████╗██║    ╚██████╗███████╗██║
+    ╚══════╝╚═╝╚══════╝╚═╝     ╚═════╝╚══════╝╚═╝
 Starter Next.js App Router template for bootstrapping Solana SPL Governance DAOs. Includes wallet connect UI, configurable governance parameters, and helper utilities for orchestrating on-chain setup flows.
 
 ## Features
