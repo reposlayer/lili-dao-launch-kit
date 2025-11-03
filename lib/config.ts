@@ -32,7 +32,23 @@ const parseEnv = (): EnvValues => {
     NEXT_PUBLIC_DAO_TAGLINE: process.env.NEXT_PUBLIC_DAO_TAGLINE
   };
 
-  return envSchema.parse(raw);
+  const result = envSchema.safeParse(raw);
+  if (!result.success) {
+    const missing = result.error.issues
+      .filter((issue) => issue.code === "invalid_type" && issue.received === "undefined")
+      .map((issue) => issue.path.join("."));
+
+    const missingMessage = missing.length
+      ? `Missing required environment variables: ${missing.join(", ")}`
+      : result.error.message;
+
+    const guidance =
+      "Populate .env.local with the values emitted by the Lili CLI (deploy dao) or provide explicit overrides before running the dashboard.";
+
+    throw new Error(`${missingMessage}. ${guidance}`);
+  }
+
+  return result.data;
 };
 
 const env = parseEnv();
