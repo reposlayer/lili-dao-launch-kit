@@ -14,8 +14,6 @@ Full-stack Next.js template that ships a multi-step wizard for provisioning Sola
 ## Features
 
 - Guided DAO wizard with validation and progress tracking
-- Wallet adapter UI (Phantom + Solflare) backed by shared Solana provider
-- Blueprint export that plugs directly into `lili deploy dao`
 - Environment-driven defaults for cluster, mint metadata, and Realms overrides
 - Tailwind CSS styling with dark surface components ready for extension
 
@@ -31,13 +29,22 @@ Copy `.env.example` → `.env.local` and tweak values to pre-fill the wizard:
 ```env
 NEXT_PUBLIC_SOLANA_CLUSTER=devnet
 NEXT_PUBLIC_SOLANA_RPC=https://api.devnet.solana.com
-NEXT_PUBLIC_GOVERNANCE_MINT=
+NEXT_PUBLIC_WALLET_ADDRESS=
+NEXT_PUBLIC_GOVERNANCE_PROGRAM_ID=
+NEXT_PUBLIC_GOVERNANCE_PROGRAM_VERSION=3
+NEXT_PUBLIC_REALM=
+NEXT_PUBLIC_GOVERNANCE=
+NEXT_PUBLIC_COMMUNITY_MINT=
+NEXT_PUBLIC_TREASURY=
+NEXT_PUBLIC_DAO_NAME=
+NEXT_PUBLIC_DAO_TAGLINE=
 NEXT_PUBLIC_GOVERNANCE_SYMBOL=DAO
 NEXT_PUBLIC_GOVERNANCE_DECIMALS=9
 NEXT_PUBLIC_MIN_TOKENS_FOR_PROPOSAL=1
 NEXT_PUBLIC_GOVERNANCE_QUORUM=20
-NEXT_PUBLIC_REALM=
+NEXT_PUBLIC_GOVERNANCE_VOTING_DAYS=7
 NEXT_PUBLIC_REALMS_PROGRAM_ID=
+NEXT_PUBLIC_COUNCIL_MINT=
 ```
 
 Launch `pnpm dev`, connect a wallet, walk through the wizard, and download the generated `dao-blueprint.json`. Run the suggested command to execute the deployment with Lili.

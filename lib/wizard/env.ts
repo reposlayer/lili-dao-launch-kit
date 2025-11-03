@@ -23,7 +23,10 @@ export const readWizardEnv = (): WizardEnv => ({
   cluster: process.env.NEXT_PUBLIC_SOLANA_CLUSTER ?? "devnet",
   rpcUrl: process.env.NEXT_PUBLIC_SOLANA_RPC ?? "",
   walletAddress: process.env.NEXT_PUBLIC_WALLET_ADDRESS ?? "",
-  governanceMint: process.env.NEXT_PUBLIC_GOVERNANCE_MINT ?? "",
+  governanceMint:
+    process.env.NEXT_PUBLIC_COMMUNITY_MINT ??
+    process.env.NEXT_PUBLIC_GOVERNANCE_MINT ??
+    "",
   governanceSymbol: process.env.NEXT_PUBLIC_GOVERNANCE_SYMBOL ?? "",
   governanceDecimals: parseNumber(process.env.NEXT_PUBLIC_GOVERNANCE_DECIMALS),
   quorumPercent: parseNumber(process.env.NEXT_PUBLIC_GOVERNANCE_QUORUM),

@@ -138,7 +138,7 @@ export function DaoWizardApp({ initialEnv }: DaoWizardAppProps) {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-5xl flex-col gap-8 px-6 py-12">
+    <div className="mx-auto flex max-w-5xl flex-col gap-8">
       <header className="flex flex-col gap-2">
         <WizardStepper />
         <p className="text-xs text-slate-400">
@@ -185,6 +185,6 @@ export function DaoWizardApp({ initialEnv }: DaoWizardAppProps) {
           Outputs feed directly into the Lili CLI. Re-run the flow anytime to refresh governance configs.
         </p>
       </footer>
-    </main>
+    </div>
   );
 }
